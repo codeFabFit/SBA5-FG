@@ -10,33 +10,19 @@ const posts = require('./routes/postRoutes')
 // const comments = require("./data/comments")
 const comments = require('./routes/commentsRoutes')
 const bodyParser = require("body-parser")
+
+
 app.set('view engine','ejs')
-app.get('/:userRoutes', (req, res) => {
+app.get('/api/users', (req, res) => {
     res.render('index', {userRoutes: {user: req.params.userRoutes}});
 })
 app.set('view engine', "ejs") 
-app.get('/:postRoutes', (req, res) => {
-    res.render('index', {postRoutes: {posts: req.params.postRoutes}} )
+app.get('/api/posts', (req, res) => {
+    res.render('posts.ejs', {postRoutes: {posts: req.params.postRoutes}} )
 })
 app.set('view engine', "ejs") 
-app.get("/api/users/:id", (req, res) => {
-    const options = {
-        title: "Welcome to the ViewNextwork",
-        content:
-          "Here, we've created a basic template engine using <code>app.engine()</code> \
-          and the <code>fs</code> module, then used <code>res.render</code> to \
-          render this page using custom content within the template.<br><br> \
-          Generally, you won't want to create your own view engines, \
-          but it important to understand how they work behind the scenes. \
-          For a look at some popular view engines, check out the documentation for \
-          <a href='https://pugjs.org/api/getting-started.html'>Pug</a>, \
-          <a href='https://www.npmjs.com/package/mustache'>Mustache</a>, or \
-          <a href='https://www.npmjs.com/package/ejs'>EJS</a>. \
-          More complete front-end libraries like React, Angular, and Vue \
-          also have Express integrations.",
-      };
-    
-      res.render("posts", options);
+app.get('/api/comments', (req, res) => {
+      res.render("comments.ejs", {commentsRoutes: {comments: req.params.commentsRoutes}});
 })
 
 // middleware  
@@ -52,17 +38,17 @@ app.use('/api/comments', comments)
 
 
 // =======USER======= // 
-app.get("/users", (req, res) => {
-    res.send("Check Out Your Friends")
-})
+// app.get("/users", (req, res) => {
+//     res.send("Check Out Your Friends")
+// })
 // ======POSTS====== //
-app.get("/posts", (req, res) => {
-    res.send("See What Your Favorite Quotes Here")
-})
+// app.get("/posts", (req, res) => {
+//     res.send("See What Your Favorite Quotes Here")
+// })
 // ======COMMENTS======// 
-app.get("/comments", (req, res) => {
-    res.send("Check out what your friends think")
-})
+// app.get("/comments", (req, res) => {
+//     res.send("Check out what your friends think")
+// })
 //see all post
 // app.get("/api/posts", (req, res) => {
 //     res.json(posts)
