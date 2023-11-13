@@ -10,6 +10,14 @@ const posts = require('./routes/postRoutes')
 // const comments = require("./data/comments")
 const comments = require('./routes/commentsRoutes')
 const bodyParser = require("body-parser")
+app.set('view engine','ejs')
+app.get('/:userRoutes', (req, res) => {
+    res.render('index', {data: {user: req.params.userRoutes}});
+})
+app.get('/:postRoutes', (req, res) => {
+    res.render('usersProfile', {data: {posts: req.params.postRoutes}} )
+})
+
 
 // middleware  
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -17,13 +25,13 @@ app.use(bodyParser.json({ extended: true }));
 app.use('/api/users', users)
 app.use('/api/posts', posts)
 app.use('/api/comments', comments)
-app.set('view engine','ejs')
+
 
 
 // home route
-app.get("/", (req, res) => {
-    res.send("Welcome to our Community")
-})
+// app.get("/", (req, res) => {
+//     res.send("Welcome to our Community")
+// })
 
 // =======USER======= // 
 app.get("/users", (req, res) => {
@@ -54,15 +62,15 @@ app.get("/comments", (req, res) => {
 
 /// the view section // didnt work with follow along video
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/users.js')
-})
-app.get('/post', (req, res) => {
-    res.sendFile(__dirname + '/post.js')
-})
-app.get('/post', (req, res) => {
-    res.sendFile(__dirname + '/comments.js')
-})
+// app.get('/', (req, res) => {
+//     res.sendFile(__dirname + '')
+// })
+// app.get('/post', (req, res) => {
+//     res.sendFile(__dirname + '/post.js')
+// })
+// app.get('/post', (req, res) => {
+//     res.sendFile(__dirname + '/comments.js')
+// })
 app.get('/user/:id', (req, res) => {
     res.render('user', {person: req.params.id})
 })
