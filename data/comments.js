@@ -19,4 +19,11 @@ const comments = [
         userId: 005 ,
         comment: "I couldn't but i love that for you" ,
     },
+    {
+        id: 5,
+        userId: 005 ,
+        comment: "yal are a bunch of baddies, im here for it" ,
+    },
 ]
+
+module.exports = comments;
