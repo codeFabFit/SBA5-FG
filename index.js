@@ -2,6 +2,7 @@ console.log("girl, you did that")
 const express = require("express");
 const app = express();
 const port = 3000;
+const fs = require('fs')
 
 // const users = require("./data/users")
 const users = require('./routes/userRoutes')
@@ -11,15 +12,25 @@ const posts = require('./routes/postRoutes')
 const comments = require('./routes/commentsRoutes')
 const bodyParser = require("body-parser")
 
-
-app.set('view engine','ejs')
-app.get('/api/users', (req, res) => {
-    res.render('index', {userRoutes: {user: req.params.userRoutes}});
+app.use(express.static("./views/index"));
+app.engine("index", (filePath, options, callback) => {
+    fs.readFile(filePath, (err, content)=> {
+        if (err) return callback(err)
+    }) 
 })
+//users 
+app.set('view engine','ejs')
+// app.get('/api/users', (req, res) => {
+   
+//     console.log("hi")
+//     // res.render('index', {userRoutes: {user: req.params.userRoutes}});
+// })
+//posts
 app.set('view engine', "ejs") 
 app.get('/api/posts', (req, res) => {
     res.render('posts.ejs', {postRoutes: {posts: req.params.postRoutes}} )
 })
+// comments 
 app.set('view engine', "ejs") 
 app.get('/api/comments', (req, res) => {
       res.render("comments.ejs", {commentsRoutes: {comments: req.params.commentsRoutes}});
