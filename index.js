@@ -20,6 +20,7 @@ app.engine("index", (filePath, options, callback) => {
 })
 //users 
 app.set('view engine','ejs')
+// the below code was overriding the output 
 // app.get('/api/users', (req, res) => {
    
 //     console.log("hi")
@@ -71,9 +72,9 @@ app.use('/api/comments', comments)
 
 
 
-// app.get("/api/comments", (req, res) => {
-//     res.json(comments)
-// })
+app.get("/api/comments/:id", (req, res) => {
+    res.json(comments)
+})
 
 /// the view section // didnt work with follow along video
 
